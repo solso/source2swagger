@@ -7,8 +7,8 @@ Coming soon...
 
 #### Dependencies
 
-* Ruby
-* Ruby gems
+* Ruby (1.8x or 1.9x)
+* Gem 
 * JSON gem (gem install json)
 
 #### Parameters
@@ -31,13 +31,13 @@ Add *-o /tmp* and it will write the JSON file(s) to */tmp*
 
 #### Extending it,
 
-Feel free to extend the code, 
+Feel free to extend the code and issue a pull request,
 
-The test suite can be called as
+The test suite can be invoked as
 
       $ rake test
 
-Required rake and the gem test/unit
+Requires *rake* and the *gem test/unit*
 
 
 ## How to
