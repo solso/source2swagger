@@ -41,7 +41,7 @@ end
 def save(results, output_path)
   results.each do |k,v|
     puts "  Saving API #{k} to #{output_path}/#{k}.json" 
-    File.new("#{output_path}/#{k}.json","w").puts v
+    File.new("#{output_path}/#{k}.json","w").puts v.to_json
   end
 end
 
@@ -49,7 +49,7 @@ def print(results)
   cont = 1
   results.each do |k,v|
     puts "API: #{cont}, #{k}\n"
-    puts v
+    puts v.to_json
     cont=cont+1
   end
 end
