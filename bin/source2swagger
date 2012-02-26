@@ -1,0 +1,75 @@
+#! /usr/bin/env ruby
+
+$:.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
+
+require "ruby-debug"
+require 'optparse'
+require "json"
+require "swagger_hash"
+require "swagger_reader"
+
+opt_input = nil
+opt_output = nil
+opt_comment = nil
+opt_extension = nil
+
+parser = OptionParser.new do |parser|
+  parser.on('-i','--input PATH', 'Directory of the input source code') do |value|
+    opt_input = value
+  end
+
+  parser.on('-e','--ext ("rb"|"c"|"js"|"py")', 'File extension of the source code') do |value|
+    opt_extension = value
+  end
+
+  parser.on('-c','--comment ("##~"|"//~")','Comment tag used to write docs') do |value|
+    opt_comment = value
+  end
+
+  parser.on('-o','--output PATH','Directory where the json output will be saved (optional)') do |value|
+    opt_output = value
+  end
+
+  parser.parse!
+end
+
+unless opt_extension and opt_input and opt_comment
+  puts parser
+  abort
+end
+
+def save(results, output_path)
+  results.each do |k,v|
+    puts "  Saving API #{k} to #{output_path}/#{k}.json" 
+    File.new("#{output_path}/#{k}.json","w").puts v
+  end
+end
+
+def print(results)
+  cont = 1
+  results.each do |k,v|
+    puts "API: #{cont}, #{k}\n"
+    puts v
+    cont=cont+1
+  end
+end
+
+def run(input, extension, comment, output)
+  reader = SwaggerReader.new
+  $_swaggerhash = Hash.new
+
+  code = reader.analyze_all_files(input,extension,comment)
+  results = reader.process_code(code) unless code.nil? || code.empty?
+
+  puts "Swagger API in #{ARGV[0]}/**/*.#{ARGV[1]}: #{results.size} API\n"
+  if output.nil?
+    print(results)
+  else
+    save(results,output)
+  end
+  puts "Done!"
+
+end
+
+
+run(opt_input, opt_extension, opt_comment, opt_output)

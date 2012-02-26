@@ -1,0 +1,27 @@
+{
+  "apis": [
+    {
+      "path": "/ping",
+      "format":"text",
+      "description": "Check the status to see if it's up and running",
+      "operations": [
+        {
+          "httpMethod":"GET",
+          "tags":["test"],
+          "nickname":"ping",
+          "deprecated":true,
+          "summary":"This operation is DEPRECATED. It returns the string \"that's getting old... pong \" if the API is up and running"
+        }
+      ],
+      "errorResponses":[
+        {
+          "reason":"API down",
+          "code":500
+        }
+      ]
+    }
+  ],
+  "basePath":"http://helloworld.3scale.net",
+  "swagrVersion":"0.1a",
+  "apiVersion":"1.0"
+}
