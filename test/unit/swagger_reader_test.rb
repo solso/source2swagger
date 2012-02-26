@@ -150,4 +150,18 @@ class SwaggerReaderTest < Test::Unit::TestCase
 
   end
 
+  def test_unordered_variables_do_not_matter
+    
+    reader = SwaggerReader.new
+    
+    code = reader.analyze_file("#{File.dirname(__FILE__)}/../data/sample5.rb","##~")
+    api1 = reader.process_code(code)
+    api1 = api1["sentiment"].to_hash
+    
+    api2 = JSON::load(File.new("#{File.dirname(__FILE__)}/../data/sample2.json","r"))
+
+    assert_equal [], diff(api1, api2) 
+
+  end
+
 end
