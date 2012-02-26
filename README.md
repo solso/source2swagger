@@ -1,13 +1,13 @@
 
 ### Usage
 
-_bin/source2swagger_
+_$ bin/source2swagger_
 
-Usage: source2swagger [options]
-    -i, --input PATH                 Directory of the input source code
-    -e, --ext ("rb"|"c"|"js"|"py")   File extension of the source code
-    -c, --comment ("##~"|"//~")      Comment tag used to write docs
-    -o, --output PATH                Directory where the json output will be saved (optional)
+> Usage: source2swagger [options]
+>     -i, --input PATH                 Directory of the input source code
+>     -e, --ext ("rb"|"c"|"js"|"py")   File extension of the source code
+>     -c, --comment ("##~"|"//~")      Comment tag used to write docs
+>     -o, --output PATH                Directory where the json output will be saved (optional)
 
 ### Example
 
