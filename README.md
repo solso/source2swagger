@@ -50,7 +50,7 @@ The names of the attributes can be seen on the section Grammar (partially) or be
 
 First you need to declare the API
 
-      ##~ a = SwaggerHash::namespace("your_api_spec_name")
+      ##~ a = source2swagger.namespace("your_api_spec_name")
 
 This will generate the file your_api_spec_name.json. The name can be declared in multiple files and several times in the same file. Each time *namespace* is invoked it returns the reference to the root element of the API named "your_api_spec_name".
 
@@ -126,7 +126,7 @@ For a more comprehensive specification of the fields needes to declare your API 
 
       $ROOT
 
-      a = SwaggerHash::namespace(STRING)
+      a = source2swagger.namespace(STRING)
 
       a.basepath = STRING             [required, ]
       a.swagrVersion = STRING         []

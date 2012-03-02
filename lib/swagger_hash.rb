@@ -1,17 +1,20 @@
 
-$_swaggerhash = Hash.new
-
 class SwaggerHash < Hash
   
-  KEEP_METHODS = %w{default []= each merge! debugger puts __id__ __send__ instance_eval == equal? initialize delegate caller object_id raise class [] to_json inspect to_s nil?}
+  KEEP_METHODS = %w{default []= each merge! debugger puts __id__ __send__ instance_eval == equal? initialize delegate caller object_id raise class [] to_json inspect to_s new nil?}
   ((private_instance_methods + instance_methods).map(&:to_sym) - KEEP_METHODS.map(&:to_sym)).each{|m| undef_method(m) }
+    
+  def initialize
+    @namespaces = Hash.new
+    ##super
+  end
 
-  def self.namespace(name)
-    @current_name = name
-    if $_swaggerhash[name].nil?
-      $_swaggerhash[name] = SwaggerHash.new
-    end
-    return $_swaggerhash[name]
+  def namespace(name)
+    @namespaces[name] ||= SwaggerHash.new
+  end
+
+  def namespaces
+    @namespaces
   end
 
   def method_missing(method, *args, &block)

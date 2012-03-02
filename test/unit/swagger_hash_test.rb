@@ -2,9 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 
 class SwaggerHashTest < Test::Unit::TestCase
 
-  def setup
-    $_swaggerhash = Hash.new
-  end 
 
   def test_basics
     h = SwaggerHash.new
@@ -98,37 +95,45 @@ class SwaggerHashTest < Test::Unit::TestCase
   
   def test_load_same_api_space
     
-    a = SwaggerHash::namespace("namespace1")
+    source2swagger = SwaggerHash.new
+
+    a = source2swagger.namespace("namespace1")
     a.bla = 10
     a.foo = "100"
     
-    a = SwaggerHash::namespace("namespace2")
+    a = source2swagger.namespace("namespace2")
     assert_equal a.to_hash, {}
     
-    a = SwaggerHash::namespace("namespace1")
+    a = source2swagger.namespace("namespace1")
     assert_equal a.to_hash, {:bla => 10, :foo => "100"}
 
     a.bar.add :a => 1, :b => 2
     assert_equal a.to_hash, {:bla => 10, :foo => "100", :bar => [{:a => 1, :b => 2}]}
     
-    a = SwaggerHash::namespace("namespace2")
+    a = source2swagger.namespace("namespace2")
     assert_equal a.to_hash, {}
     
-    a = SwaggerHash::namespace("namespace1")
+    a = source2swagger.namespace("namespace1")
     assert_equal a.to_hash, {:bla => 10, :foo => "100", :bar => [{:a => 1, :b => 2}]}
     
   end
   
   def test_save
 
-    a = SwaggerHash::namespace("namespace1")
+    source2swagger = SwaggerHash.new
+
+    a = source2swagger.namespace("namespace1")
     a.bla = 10
     a.foo = "100"
 
-    b = SwaggerHash::namespace("namespace2")
+    b = source2swagger.namespace("namespace2")
+    b.foo.bar = 42
 
-    assert_equal $_swaggerhash["namespace1"].to_hash, {:bla => 10, :foo => "100"}
-    assert_equal $_swaggerhash["namespace2"].to_hash, {}
+    assert_equal source2swagger.namespace("namespace1").to_hash, {:bla => 10, :foo => "100"}
+    assert_equal source2swagger.namespace("namespace2").to_hash, {:foo => {:bar => 42}}
+
+    a = source2swagger.namespace("namespace1")
+    assert_equal a.to_hash, {:bla => 10, :foo => "100"}
 
   end
   

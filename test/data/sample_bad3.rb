@@ -1,9 +1,9 @@
-##~ sapi = SwaggerHash::namespace("sentiment")
+##~ sapi = source2swagger.namespace("sentiment")
 ##~ sapi.basePath = "http://helloworld.3scale.net"
 ##~ sapi.swagrVersion = "0.1a"
 ##~ sapi.apiVersion = "1.0"
 
-##~ sapi = SwaggerHash::namespace("sentiment")
+##~ sapi = source2swagger.namespace("sentiment")
 ##~ a = sapi.apis.add
 ## 
 ##~ a.set :path => "/word/{word}", :format => "json"
@@ -26,7 +26,7 @@
 ##~ op.parameters.add :name => "app_id", :description => "Your access application id", :dataType => "string", :allowMultiple => false, :required => true, :paramType => "query"
 ##~ op.parameters.add :name => "app_key", :description => "Your access application key", :dataType => "string", :allowMultiple => false, :required => false, :paramType => "query"
 ## 
-##~ sapi = SwaggerHash::namespace("sentiment")
+##~ sapi = source2swagger.namespace("sentiment")
 ##
 ##~ a = sapi.apis.add
 ## 

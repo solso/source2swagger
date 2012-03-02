@@ -1,4 +1,4 @@
-##~ sapi = SwaggerHash::namespace("sentiment")
+##~ sapi = source2swagger.namespace("sentiment")
 ##~ sapi.basePath = "http://helloworld.3scale.net"
 ##~ sapi.swagrVersion = "0.1a"
 ##~ sapi.apiVersion = "1.0"

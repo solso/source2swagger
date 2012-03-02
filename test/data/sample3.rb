@@ -29,12 +29,12 @@ class SentimentApi < Sinatra::Base
 
   @@the_logic = Analyzer.new
 
-  ##~ sapi = SwaggerHash::namespace("sentiment")
+  ##~ sapi = source2swagger.namespace("sentiment")
   ##~ sapi.basePath = "http://helloworld.3scale.net"
   ##~ sapi.swagrVersion = "0.1a"
   ##~ sapi.apiVersion = "1.0"
 
-  ##~ sapi = SwaggerHash::namespace("sentiment")
+  ##~ sapi = source2swagger.namespace("sentiment")
   ##~ a = sapi.apis.add
   ## 
   ##~ a.set :path => "/word/{word}", :format => "json"
@@ -64,7 +64,7 @@ class SentimentApi < Sinatra::Base
     status 200
   end
 
-  ##~ s = SwaggerHash::namespace("sentiment")
+  ##~ s = source2swagger.namespace("sentiment")
   ##~ a = s.apis.add
   ##~ 
   ##~ a.set :path => "/sentence/{sentence}", :format => "json"
@@ -94,7 +94,7 @@ class SentimentApi < Sinatra::Base
   end
 
 
-  ##~ s = SwaggerHash::namespace("sentiment")
+  ##~ s = source2swagger.namespace("sentiment")
   ##~ a = s.apis.add
   ##~ 
   ##~ a.path = "/word/{word}/{value}"
@@ -126,7 +126,7 @@ class SentimentApi < Sinatra::Base
   end
 
 
-  ##~ sapi = SwaggerHash::namespace("sentiment")
+  ##~ sapi = source2swagger.namespace("sentiment")
   ##~ a = sapi.apis.add
   ## 
   ##~ a.set :path => "/ping", :format => "text"

@@ -3,23 +3,24 @@ require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 class SwaggerReaderTest < Test::Unit::TestCase
 
   def setup
-    $_swaggerhash = Hash.new
+    source2swagger = SwaggerHash.new
   end 
  
   def test_swagger_simple
   
-    sapi = SwaggerHash::namespace("test")
+    source2swagger = SwaggerHash.new
+    sapi = source2swagger.namespace("test")
     ep = sapi.endpoint.add
     ep.set :path => "/sentence/{sentence}", :format => "json"
     ep.description = "Returns the aggregated sentiment of a sentence"
   
     expected = {:endpoint => [{:path => "/sentence/{sentence}", :format => "json", :description => "Returns the aggregated sentiment of a sentence"}]}  
-    assert_equal $_swaggerhash["test"].to_hash, expected
+    assert_equal source2swagger.namespace("test").to_hash, expected
     
-    $_swaggerhash = Hash.new
+    
       
-    code = ["sapi = SwaggerHash::namespace(\"test\")", "ep = sapi.endpoint.add", "ep.set :path => \"/sentence/{sentence}\", :format => \"json\"", "ep.description = \"Returns the aggregated sentiment of a sentence\""]
-    code << "$_swaggerhash[\"test\"].to_hash"
+    code = ["source2swagger = SwaggerHash.new", "sapi = source2swagger.namespace(\"test\")", "ep = sapi.endpoint.add", "ep.set :path => \"/sentence/{sentence}\", :format => \"json\"", "ep.description = \"Returns the aggregated sentiment of a sentence\""]
+    code << "source2swagger.namespace(\"test\").to_hash"
     res = eval(code.join(";"))
     assert_equal res, expected  
     
@@ -121,7 +122,6 @@ class SwaggerReaderTest < Test::Unit::TestCase
 
   end
 
-
   def test_exception_all_files
 
     reader = SwaggerReader.new
@@ -145,9 +145,9 @@ class SwaggerReaderTest < Test::Unit::TestCase
       api1 = reader.process_code(code)
       assert_equal true, false
     rescue Exception => e
-      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad3.rb:17\n#<NoMethodError: undefined method `to_hash' for nil:NilClass>", e.to_s
-    end
+      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad3.rb:17\n#<NameError: undefined local variable or method `error_sanitize_NOT_YET_DEFINED' ", e.to_s.split("for")[0].to_s
 
+    end
   end
 
   def test_unordered_variables_do_not_matter
@@ -161,7 +161,21 @@ class SwaggerReaderTest < Test::Unit::TestCase
     api2 = JSON::load(File.new("#{File.dirname(__FILE__)}/../data/sample2.json","r"))
 
     assert_equal [], diff(api1, api2) 
+  end
 
+  def test_safe_level
+    
+    assert_raises SwaggerReaderException do
+      reader = SwaggerReader.new
+
+      code = {:code => [], :line_number => [], :file => []}
+   
+      code[:code] << "system \"rm -rf /tmp/test.txt\""
+      code[:line_number] << 0
+      code[:file] << "foo"
+
+      reader.process_code(code)
+    end
   end
 
 end

@@ -48,11 +48,11 @@ class SwaggerReader
     code[:code].each do |code_line|
       code_line.strip!        
       if code_line[0]=='@'
-        tmp_vars[:code] << code_line
+        tmp_vars[:code] << code_line.gsub('@',' ')
         tmp_vars[:line_number] << code[:line_number][cont]
         tmp_vars[:file] << code[:file][cont]
       else
-        tmp_not_vars[:code] << code_line
+        tmp_not_vars[:code] << code_line.gsub('@',' ')
         tmp_not_vars[:line_number] << code[:line_number][cont]
         tmp_not_vars[:file] << code[:file][cont]
       end
@@ -70,23 +70,31 @@ class SwaggerReader
 
     code = sort_for_vars_declaration(code)
 
+    code[:code].insert(0,"source2swagger = SwaggerHash.new")
+
     code[:code].size.times do |cont|
-      $_swaggerhash = Hash.new
+      
       begin
         v = code[:code][0..cont]
         v << "out = {:apis => []}"
-        v << "$_swaggerhash.each {|k,v| out[k] = v.to_hash}"
-        eval(v.join(";"))
+        v << "source2swagger.namespaces.each {|k,v| out[k] = v.to_hash}"
+        str=v.join(";")
+        proc do 
+          $SAFE = 4
+          eval(str)
+        end.call
       rescue Exception => e
-        raise SwaggerReaderException, "Error parsing source files at #{code[:file][cont]}:#{code[:line_number][cont]}\n#{e.inspect}"
+        raise SwaggerReaderException, "Error parsing source files at #{code[:file][cont-1]}:#{code[:line_number][cont-1]}\n#{e.inspect}"
       end
     end
-    $_swaggerhash = Hash.new  
-
+    
     code[:code] << "out = {:apis => []}"
-    code[:code] << "$_swaggerhash.each {|k,v| out[k] = v.to_hash}"
-  
-    res = eval(code[:code].join(";"))
+    code[:code] << "source2swagger.namespaces.each {|k,v| out[k] = v.to_hash}"
+    str = code[:code].join(";")
+    res = proc do 
+      $SAFE = 4
+      eval(str)
+    end.call
 
     res.each do |k, v|
       res[k] = v.to_hash
