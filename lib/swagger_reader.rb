@@ -95,7 +95,9 @@ class SwaggerReader
       $SAFE = 4
       eval(str)
     end.call
-
+    
+    raise SwaggerReaderException, "Error on the evaluation of the code in docs: #{res}" unless res.class==Hash
+      
     res.each do |k, v|
       res[k] = v.to_hash
     end
