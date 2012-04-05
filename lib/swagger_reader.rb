@@ -8,7 +8,7 @@ class SwaggerReader
     File.open(file,"r") do |f|
       line_number = 1
       while (line = f.gets)
-        v = line.strip!.split(" ")
+        v = line.strip.split(" ")
         if !v.nil? && v.size > 0 && (v[0]==comment_str)   
           code[:code] << v[1..v.size].join(" ")
           code[:file] << file
