@@ -2,7 +2,6 @@
 
 $:.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
 
-require "ruby-debug"
 require 'optparse'
 require "json"
 require "swagger_hash"

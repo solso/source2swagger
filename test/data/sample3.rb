@@ -4,17 +4,7 @@
 require 'rubygems'
 require './analyzer.rb'
 require 'json'
-#require 'sinatra/async'
 require 'sinatra'
-require 'ruby-debug'
-
-##provider_key 77f8519dc481cd96ac70e02d8fba81c1
-##app_id    a8e6d548
-##app_key 	2c088cfc57607054064c147800765cc5
-##helloworld.3scale.net
-##helloworld-api.3scale.net
-
-## very good json parser online, http://json.parser.online.fr/
 
 class SentimentApi < Sinatra::Base
   disable :logging
