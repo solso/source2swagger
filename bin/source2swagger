@@ -1,11 +1,21 @@
 #! /usr/bin/env ruby
 
-$:.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
-
 require 'optparse'
 require "json"
-require "swagger_hash"
-require "swagger_reader"
+
+begin
+  require "swagger_hash"
+  require "swagger_reader"
+rescue LoadError
+  lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
+
+  if $:.include?(lib)
+    raise
+  else
+    $:.unshift(lib)
+    retry
+  end
+end
 
 opt_input = nil
 opt_output = nil
