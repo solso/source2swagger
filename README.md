@@ -1,4 +1,3 @@
-
 ## Description
 
 Coming soon...
@@ -122,7 +121,7 @@ Check [test/data/sample3.rb](https://github.com/solso/source2swagger/blob/master
 
 (partial)
 
-For a more comprehensive specification of the fields needes to declare your API on the Swagger format you can always go to the [source](http://swagger.wordnik.com/spec) 
+For a more comprehensive specification of the fields needed to declare your API on the Swagger format you can always go to the [source](http://swagger.wordnik.com/spec) 
 
       $ROOT
 
