@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
+require 'json'
 
 class SwaggerReaderTest < Test::Unit::TestCase
 
