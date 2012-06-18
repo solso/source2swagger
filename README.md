@@ -1,4 +1,3 @@
-
 ## Description
 
 Coming soon...
@@ -23,7 +22,7 @@ Coming soon...
 
 #### Example
 
-      $ bin/souce2swagger -i ~/project/lib -e "rb" -c "##~"_
+      $ bin/source2swagger -i ~/project/lib -e "rb" -c "##~"_
 
 This will output the Swagger compatible JSON specs on the terminal. 
 
