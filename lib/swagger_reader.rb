@@ -47,7 +47,7 @@ class SwaggerReader
     cont = 0
     code[:code].each do |code_line|
       code_line.strip!        
-      if code_line[0]=='@'
+      if code_line[0]=="@"[0]
         tmp_vars[:code] << code_line.gsub('@',' ')
         tmp_vars[:line_number] << code[:line_number][cont]
         tmp_vars[:file] << code[:file][cont]
