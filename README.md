@@ -26,6 +26,17 @@ Coming soon...
 
 This will output the Swagger compatible JSON specs on the terminal. 
 
+For this example the file annotated with the swagger spec are ruby files (*-e "rb"*). The annotations
+started with *##~* to distinguish them from normal ruby comments that start *#*. 
+
+The source code is on the directory *~/project/lib* , note that the path is handled recursively, it will analyze all ruby
+file under the declared path.
+
+You can also target a single file setting the option *-f* 
+
+      $ bin/source2swagger -f ~/data/test/sample3.rb -c "##~"_
+
+
 Add *-o /tmp* and it will write the JSON file(s) to */tmp*
 
 #### Contributions
