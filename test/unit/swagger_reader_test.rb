@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
-require 'json'
 
 class SwaggerReaderTest < Test::Unit::TestCase
 
@@ -118,7 +117,7 @@ class SwaggerReaderTest < Test::Unit::TestCase
       api1 = reader.process_code(code)
       assert_equal true, false
     rescue Exception => e
-      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad2.rb:9\n#<SyntaxError: (eval):1: unterminated string meets end of file>", e.to_s
+      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad2.rb:9", e.message.split("\n").first
     end
 
   end
@@ -132,7 +131,7 @@ class SwaggerReaderTest < Test::Unit::TestCase
       api1 = reader.process_code(code)
       assert_equal true, false
     rescue Exception => e
-      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad1.rb:17\n#<SyntaxError: (eval):1: syntax error, unexpected keyword_end, expecting $end\n...=> \"API down\", :code => 500;end = a.operations.add;out = {:a...\n...                               ^>", e.to_s
+      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad1.rb:17", e.message.split("\n").first
     end
 
   end
@@ -146,7 +145,7 @@ class SwaggerReaderTest < Test::Unit::TestCase
       api1 = reader.process_code(code)
       assert_equal true, false
     rescue Exception => e
-      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad3.rb:17\n#<NameError: undefined local variable or method `error_sanitize_NOT_YET_DEFINED' ", e.to_s.split("for")[0].to_s
+      assert_equal "Error parsing source files at #{File.dirname(__FILE__)}/../data/sample_bad3.rb:17", e.message.split("\n").first
 
     end
   end

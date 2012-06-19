@@ -1,7 +1,8 @@
+require 'rubygems'
 require 'test/unit'
+require 'json'
 require 'swagger_hash'
 require 'swagger_reader'
-require 'json'
 
 $:.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
 
