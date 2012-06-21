@@ -17,6 +17,7 @@ Coming soon...
      Usage: source2swagger [options]
      -i, --input PATH                 Directory of the input source code
      -e, --ext ("rb"|"c"|"js"|"py")   File extension of the source code
+     -f, --file FILENAME              Overwrites options: -i and -e. Takes a single annotated source code file
      -c, --comment ("##~"|"//~")      Comment tag used to write docs
      -o, --output PATH                Directory where the json output will be saved (optional)
 
