@@ -177,5 +177,13 @@ class SwaggerReaderTest < Test::Unit::TestCase
       reader.process_code(code)
     end
   end
+  
+  def test_missing_ad_sign
+    ## https://github.com/solso/source2swagger/issues/6
+    reader = SwaggerReader.new
+    code = reader.analyze_file("#{File.dirname(__FILE__)}/../data/sample6.rb","##~")
+    api1 = reader.process_code(code)
+    assert_equal "<%= @base_path %>", api1["sentiment"][:basePath]
+  end
 
 end
