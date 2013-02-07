@@ -186,4 +186,35 @@ class SwaggerReaderTest < Test::Unit::TestCase
     assert_equal "<%= @base_path %>", api1["sentiment"][:basePath]
   end
 
+  def test_response_class
+    reader = SwaggerReader.new
+    code = reader.analyze_file("#{File.dirname(__FILE__)}/../data/sample7.rb","##~")
+    api1 = reader.process_code(code)
+
+    # check swagger version
+    assert_equal api1["helloWorld"][:swaggerVersion], "0.1a"
+
+    api = api1["helloWorld"][:apis][0]
+    op = api[:operations][0]
+
+    # check model
+    assert_equal op[:responseClass], "HelloMessage"
+  end
+
+
+  def test_models
+    reader = SwaggerReader.new
+    code = reader.analyze_file("#{File.dirname(__FILE__)}/../data/sample7.rb","##~")
+    api1 = reader.process_code(code)
+
+    # check swagger version
+    assert_equal api1["helloWorld"][:swaggerVersion], "0.1a"
+
+    model = api1["helloWorld"][:models]["HelloMessage"]
+    assert_equal model[:id], "HelloMessage"
+
+    properties = model[:properties]
+    assert_equal properties[:id], {:type => "long"}
+    assert_equal properties[:name], {:type => "string"}
+  end
 end
