@@ -21,7 +21,7 @@ class SentimentApi < Sinatra::Base
 
   ##~ sapi = source2swagger.namespace("sentiment")
   ##~ sapi.basePath = "http://helloworld.3scale.net"
-  ##~ sapi.swagrVersion = "0.1a"
+  ##~ sapi.swaggerVersion = "0.1a"
   ##~ sapi.apiVersion = "1.0"
 
   ##~ sapi = source2swagger.namespace("sentiment")
