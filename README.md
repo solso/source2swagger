@@ -23,7 +23,7 @@ Coming soon...
 
 #### Example
 
-      $ bin/source2swagger -i ~/project/lib -e "rb" -c "##~"_
+      $ bin/source2swagger -i ~/project/lib -e "rb" -c "##~"
 
 This will output the Swagger compatible JSON specs on the terminal. 
 
@@ -35,7 +35,7 @@ file under the declared path.
 
 You can also target a single file setting the option *-f* 
 
-      $ bin/source2swagger -f ~/data/test/sample3.rb -c "##~"_
+      $ bin/source2swagger -f ~/data/test/sample3.rb -c "##~"
 
 
 Add *-o /tmp* and it will write the JSON file(s) to */tmp*
