@@ -70,17 +70,17 @@ This will generate the file your_api_spec_name.json. The name can be declared in
 One by one,
 
       ##~ a.basePath = "http://helloworld.3scale.net"
-      ##~ a.swagrVersion = "0.1a"
+      ##~ a.swaggerVersion = "0.1a"
       ##~ a.apiVersion = "1.0"
 
 or all at the same time,
 
-      ##~ a.set "basePath" => "http://helloworld.3scale.net", "swagrVersion" => "0.1a", "apiVersion" => "1.0"
+      ##~ a.set "basePath" => "http://helloworld.3scale.net", "swaggerVersion" => "0.1a", "apiVersion" => "1.0"
 
 
 You can always combine
 
-      ##~ a.set "basePath" => "http://helloworld.3scale.net", "swagrVersion" => "0.1a"
+      ##~ a.set "basePath" => "http://helloworld.3scale.net", "swaggerVersion" => "0.1a"
       ##~ a.apiVersion = "1.0"
 
 #### Adding and element to a list attribute
@@ -140,7 +140,7 @@ For a more comprehensive specification of the fields needed to declare your API 
       a = source2swagger.namespace(STRING)
 
       a.basepath = STRING             [required, ]
-      a.swagrVersion = STRING         []
+      a.swaggerVersion = STRING       []
       a.apiVersion = STRING           []
       a.apis = LIST[$ENDPOINTS]       [required, ]
 
@@ -165,6 +165,7 @@ For a more comprehensive specification of the fields needed to declare your API 
       o.nickname = STRING             []
       o.deprecated = BOOLEAN          []
       o.summary = STRING              []
+      o.responseClass = STRING        []
       o.parameters = LIST[$PARAMETERS][]
 
       PARAMETERS

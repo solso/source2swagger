@@ -1,4 +1,4 @@
-##~ sapi = source2swagger.namespace("sentiment")
+##~ sapi = source2swagger.namespace("helloWorld")
 ##~ sapi.basePath = "http://helloworld.3scale.net"
 ##~ sapi.swaggerVersion = "0.1a"
 ##~ sapi.apiVersion = "1.0"
@@ -14,5 +14,13 @@
 ## 
 ##~ op = a.operations.add   
 ##~ op.set :httpMethod => "GET", :tags => ["test"], :nickname => "ping", :deprecated => true
-##~ op.summary = "This operation is DEPRECATED. It returns the string \"that's getting old... pong \" if the API is up and running"  
+##~ op.summary = "This operation is nice, it returns an object"
+##~ op.responseClass = "HelloMessage"
 ##
+##
+##  declaring models
+##
+##~ m = {:id => "HelloMessage", :properties => {:id => {:type => "long"}, :name => {:type => "string"}}}
+##~ sapi.models = {"HelloMessage" => m}
+
+
