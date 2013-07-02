@@ -89,7 +89,7 @@ You can always combine
       ##~ op.httpMethod = "GET"
       ##~ op.tags = ["production"] 
       ##~ op.nickname = "get_word"
-      ##~ deprecated => false
+      ##~ op.deprecated => false
       ##~
       ##~ op = a.operations.add
       ##~ op.set :httpMethod => "POST", :tags => ["production"], :nickname => "set_word", :deprecated => false
