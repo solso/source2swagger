@@ -64,7 +64,7 @@ end
 def save(results, output_path)
   results.each do |k,v|
     puts "  Saving API #{k} to #{output_path}/#{k}.json" 
-    File.new("#{output_path}/#{k}.json","w").puts v.to_json
+    File.new("#{output_path}/#{k}.json","w").puts JSON.pretty_generate(v)
   end
 end
 
