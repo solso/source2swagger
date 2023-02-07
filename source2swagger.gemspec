@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
 
   gem.description   = %q{Tool for converting comments to Swagger JSON specification}
   gem.summary       = %q{Builds a swagger compliant JSON specification from annotations on the comments of your source code.}
-
+  gem.license       = "MIT"
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
